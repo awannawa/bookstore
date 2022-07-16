@@ -1,7 +1,10 @@
 import React from "react";
-function TabelBuku({ showEdit, books }) {
-    function editData() {
-        showEdit();
+function TabelBuku({ showEdit, books, requestToDelete }) {
+    function editData(book) {
+        showEdit(book);
+    }
+    function deleteData(book) {
+        requestToDelete(book);
     }
 
     return (
@@ -23,8 +26,8 @@ function TabelBuku({ showEdit, books }) {
                             <td>{book.judul}</td>
                             <td>{book.pengarang}</td>
                             <td>
-                                <button className="btn-sm btn-warning mx-2" onClick={() => editData()}>Edit</button>
-                                <button className="btn-sm btn-danger">Delete</button>
+                                <button className="btn-sm btn-warning mx-2" onClick={() => editData(book)}>Edit</button>
+                                <button className="btn-sm btn-danger" onClick={() => deleteData(book)}>Delete</button>
                             </td>
                         </tr>
                     ))}

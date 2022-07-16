@@ -11,10 +11,12 @@ function ManajemenBuku() {
 
     // PART EVENT HANDLING
     function showCreateForm() {
-        setFormMode("show")
+        setInputForm("");
+        setFormMode("create");
     }
-    function showEditForm(){
-        setFormMode("show")
+    function showEditForm(book){
+        setInputForm(book);
+        setFormMode("edit");
     }
     useEffect(() => {
         retrieveData();
@@ -32,14 +34,40 @@ function ManajemenBuku() {
         setInputForm({ ...inputForm, pengarang: e.target.value })
     };
     function submitForm(event) {
-        event.preventDefault();
+    //    event.preventDefault();
+    //    axios.post("http://localhost:4000/book/add", inputForm)
+    //    .then(() => {
+    //        alert("Data berhasil ditambahkan!");
+    //        retrieveData();
+    //    })
+    //    .catch((error) => { console.log(error.response) })
+    if (formMode === "create") {
         axios.post("http://localhost:4000/book/add", inputForm)
         .then(() => {
             alert("Data berhasil ditambahkan!");
             retrieveData();
         })
+        .catch((error) => {console.log(error.response) })
+    }
+    if (formMode === "edit") {
+        axios.put("http://localhost:4000/book/update/" + inputForm._id, inputForm)
+        .then(() => {
+            retrieveData();
+            alert("Data berhasil diubah!");
+        })
         .catch((error) => { console.log(error.response) })
+    }
     };
+
+    function deleteOne(book){
+        axios.delete("http://localhost:4000/book/delete/" + book._id)
+        .then(() => {
+            retrieveData();
+            alert("Data berhasil dihapus!")
+        })
+        .catch((error) => {console.log(error.response) })
+    };
+
 
     return (
         <div className="container mt-3">
@@ -50,7 +78,7 @@ function ManajemenBuku() {
             </button>
 
             {/* input form*/}
-            {formMode === "show" && (
+            {formMode !== "" && (
                 <div id="form" className="card py-2 my-3 bg-secondary">
                     <div className="card-body">
                         <h4>Form Buku</h4>
@@ -61,6 +89,7 @@ function ManajemenBuku() {
                                     name="judul"
                                     className="form-control mx-2"
                                     placeholder="Judul..."
+                                    value={inputForm.judul || ""}
                                     onChange={handleJudul}
                                 />
                             </div>
@@ -70,6 +99,7 @@ function ManajemenBuku() {
                                     name="judul"
                                     className="form-control mx-2"
                                     placeholder="Pengarang..."
+                                    value={inputForm.pengarang || ""}
                                     onChange={handlePengarang}
                                 />
                             </div>
@@ -81,8 +111,9 @@ function ManajemenBuku() {
                 </div>
             )}
             {/* tabel data buku */}
-            <TabelBuku showEdit={showEditForm} books={books} />
-            <p>{JSON.stringify(books)}</p>
+            <TabelBuku showEdit={showEditForm} books={books} requestToDelete={deleteOne}/>
+            {/* un display dibawah nya biar rapih
+            <p>{JSON.stringify(books)}</p>*/}
         </div>
     )
 }
