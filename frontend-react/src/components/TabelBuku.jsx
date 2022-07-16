@@ -1,5 +1,5 @@
 import React from "react";
-function TabelBuku({ showEdit }) {
+function TabelBuku({ showEdit, books }) {
     function editData() {
         showEdit();
     }
@@ -12,20 +12,22 @@ function TabelBuku({ showEdit }) {
                     <tr>
                         <th>No.</th>
                         <th>Judul</th>
-                        <th>Pengaran</th>
+                        <th>Pengarang</th>
                         <th className="col-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Laskar Pelangi</td>
-                        <td>Andrea Hirata</td>
-                        <td>
-                            <button className="btn-sm btn-warning mx-2" onClick={ () => editData()}>Edit</button>
-                            <button className="btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    {books.map((book, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{book.judul}</td>
+                            <td>{book.pengarang}</td>
+                            <td>
+                                <button className="btn-sm btn-warning mx-2" onClick={() => editData()}>Edit</button>
+                                <button className="btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
