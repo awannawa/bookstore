@@ -96,7 +96,7 @@ function ManajemenBuku() {
                             <div className="col-4">
                                 <input
                                     type="text" 
-                                    name="judul"
+                                    name="pengarang"
                                     className="form-control mx-2"
                                     placeholder="Pengarang..."
                                     value={inputForm.pengarang || ""}
