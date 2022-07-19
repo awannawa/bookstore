@@ -23,6 +23,7 @@ function ManajemenBuku() {
     }, []);
 
     function retrieveData() {
+        //perhatikan ipnya mau di arahin kemana
         axios.get("http://192.168.10.69:4000/book")
         .then((response) => {setBooks(response.data) })
         .catch(function (error) {console.log(error.response.data) })
@@ -42,6 +43,7 @@ function ManajemenBuku() {
     //    })
     //    .catch((error) => { console.log(error.response) })
     if (formMode === "create") {
+        //perhatikan ipnya mau di arahin kemana
         axios.post("http://192.168.10.69:4000/book/add", inputForm)
         .then(() => {
             alert("Data berhasil ditambahkan!");
@@ -50,6 +52,7 @@ function ManajemenBuku() {
         .catch((error) => {console.log(error.response) })
     }
     if (formMode === "edit") {
+        //perhatikan ipnya mau di arahin kemana
         axios.put("http://192.168.10.69:4000/book/update/" + inputForm._id, inputForm)
         .then(() => {
             retrieveData();
@@ -60,6 +63,7 @@ function ManajemenBuku() {
     };
 
     function deleteOne(book){
+        //perhatikan ipnya mau di arahin kemana
         axios.delete("http://192.168.10.69:4000/book/delete/" + book._id)
         .then(() => {
             retrieveData();
