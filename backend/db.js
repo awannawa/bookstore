@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost:27017/db_buku");
+mongoose.connect("mongodb://192.168.10.69:27017/db_buku");
 
 const db = mongoose.connection;
 

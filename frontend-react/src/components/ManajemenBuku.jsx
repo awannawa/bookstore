@@ -23,7 +23,7 @@ function ManajemenBuku() {
     }, []);
 
     function retrieveData() {
-        axios.get("http://localhost:4000/book")
+        axios.get("http://192.168.10.69:4000/book")
         .then((response) => {setBooks(response.data) })
         .catch(function (error) {console.log(error.response.data) })
     };
@@ -35,14 +35,14 @@ function ManajemenBuku() {
     };
     function submitForm(event) {
     //    event.preventDefault();
-    //    axios.post("http://localhost:4000/book/add", inputForm)
+    //    axios.post("http://192.168.10.69:4000/book/add", inputForm)
     //    .then(() => {
     //        alert("Data berhasil ditambahkan!");
     //        retrieveData();
     //    })
     //    .catch((error) => { console.log(error.response) })
     if (formMode === "create") {
-        axios.post("http://localhost:4000/book/add", inputForm)
+        axios.post("http://192.168.10.69:4000/book/add", inputForm)
         .then(() => {
             alert("Data berhasil ditambahkan!");
             retrieveData();
@@ -50,7 +50,7 @@ function ManajemenBuku() {
         .catch((error) => {console.log(error.response) })
     }
     if (formMode === "edit") {
-        axios.put("http://localhost:4000/book/update/" + inputForm._id, inputForm)
+        axios.put("http://192.168.10.69:4000/book/update/" + inputForm._id, inputForm)
         .then(() => {
             retrieveData();
             alert("Data berhasil diubah!");
@@ -60,7 +60,7 @@ function ManajemenBuku() {
     };
 
     function deleteOne(book){
-        axios.delete("http://localhost:4000/book/delete/" + book._id)
+        axios.delete("http://192.168.10.69:4000/book/delete/" + book._id)
         .then(() => {
             retrieveData();
             alert("Data berhasil dihapus!")

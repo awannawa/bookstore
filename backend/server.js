@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+//const helmet = require("helmet");
+const mongoose = require("mongoose")
 const morgan = require("morgan");
 
 require("./db.js");
@@ -9,6 +11,7 @@ const port = 4000;
 const routeAkses = require("./routes.js");
 
 app.use(cors());
+//app.use(helmet());
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use("/book", routeAkses);
